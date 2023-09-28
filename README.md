@@ -85,7 +85,7 @@ jobs:
       PUBLIC_URL: ${{ steps.generate_public_url.outputs.public_url }}
   _1:
     needs: [setup_workflow_env]
-    uses:  acdh-oeaw/gl-autodevops-minimal-port/.github/workflows/build-cnb-and-push-to-registry.yaml@main
+    uses: SSHOC/gl-autodevops-minimal-port/.github/workflows/build-cnb-and-push-to-registry.yaml@main
     secrets: inherit
 # if you run this outside of of an org that provides KUBE_CONFIG etc as a secret, you need to specify every secret you want to pass by name
     with:
@@ -98,9 +98,9 @@ jobs:
       submodules: ${{ needs.setup_workflow_env.outputs.submodules }}
   _2:
     needs: [setup_workflow_env]
-    uses:  acdh-oeaw/gl-autodevops-minimal-port/.github/workflows/herokuish-tests-db-url.yaml@main
+    uses: SSHOC/gl-autodevops-minimal-port/.github/workflows/herokuish-tests-db-url.yaml@main
     secrets: inherit
-# if you run this outside of acdh-oeaw yo uneed to specify every secret you want to pass by name
+# if you run this outside of SSHOC yo uneed to specify every secret you want to pass by name
     with:
       environment: ${{ needs.setup_workflow_env.outputs.environment}}
       registry_root: ${{ needs.setup_workflow_env.outputs.registry_root }}
@@ -112,9 +112,9 @@ jobs:
       submodules: ${{ needs.setup_workflow_env.outputs.submodules }}
   _3:
     needs: [setup_workflow_env, generate_workflow_vars, _1, _2]
-    uses: acdh-oeaw/gl-autodevops-minimal-port/.github/workflows/deploy.yml@main
+    uses: SSHOC/gl-autodevops-minimal-port/.github/workflows/deploy-cluster-2.yml@main
     secrets: inherit
-# if you run this outside of acdh-oeaw yo uneed to specify every secret you want to pass by name
+# if you run this outside of SSHOC yo uneed to specify every secret you want to pass by name
 #      KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
 #      KUBE_INGRESS_BASE_DOMAIN: ${{ secrets.KUBE_INGRESS_BASE_DOMAIN }}
 #      POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
