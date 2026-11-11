@@ -156,6 +156,7 @@ jobs:
           fi
           echo -n "$SECRETS_CONTEXT" | jq -r '[to_entries[]|select(.key|startswith("LC_K8S_SECRET_"))]|map("\(.key|sub("LC_K8S_SECRET_"; "")|ascii_downcase)=\(.value|tostring)")|.[]' >> secrets.env
           echo -n "$VARS_CONTEXT" | jq -r '[to_entries[]|select(.key|startswith("LC_K8S_SECRET_"))]|map("\(.key|sub("LC_K8S_SECRET_"; "")|ascii_downcase)=\(.value|tostring)")|.[]' >> secrets.env
+          echo "CI=true" >> secrets.env
           docker create -t --name test-run-step \
             --env-file secrets.env \
             -e DATABASE_URL=postgres://${{ inputs.POSTGRES_USER }}:${{ inputs.PGPASSWORD }}@postgres:5432/${{ inputs.POSTGRES_DB }} \

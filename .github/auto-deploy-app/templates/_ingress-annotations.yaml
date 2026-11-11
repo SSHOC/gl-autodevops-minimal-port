@@ -1,5 +1,7 @@
 {{/* We set the annotation value regardless of API versions, because the user may have an old controller that still works */}}
-kubernetes.io/ingress.class: {{ .Values.ingress.className | default "nginx" | quote }}
+{{- if .Values.ingress.className }}
+kubernetes.io/ingress.class: {{ .Values.ingress.className | quote }}
+{{- end }}
 {{- if .Values.ingress.tls.enabled }}
 kubernetes.io/tls-acme: {{ .Values.ingress.tls.acme | quote }}
 {{- end }}

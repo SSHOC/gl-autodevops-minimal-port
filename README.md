@@ -231,8 +231,10 @@ service:
 ingress:
   enabled: true
   path: "/"
-  className: "nginx"
+  # classname: traefik
+  # classname: rke2-ingress-nginx-migration
   annotations:
+    # Supported using traefik's ingressKubernetesNGINX emulation
     #nginx.ingress.kubernetes.io/app-root: # the root route if it is not /
 livenessProbe:
   path: # path to your health check route, can be /

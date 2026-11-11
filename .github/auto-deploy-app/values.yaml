@@ -95,7 +95,8 @@ ingress:
     acme: true
     secretName: ""
     useDefaultSecret: false
-  # className: nginx
+  # className: traefik
+  # classname: rke2-ingress-nginx-migration
   modSecurity:
     enabled: false
     secRuleEngine: "DetectionOnly"
